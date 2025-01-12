@@ -1,0 +1,24 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+    env_file:
+      - ./backend/.env
+    command: flask --app app run --host=0.0.0.0
+    
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app # Ensure your local changes are reflected in the container
+      - /app/node_modules # Prevent node_modules from conflicting with the host
+    stdin_open: true
+    tty: true
+    command: npm run dev -- --host 0.0.0.0
