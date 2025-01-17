@@ -28,11 +28,13 @@ function LoginPage() {
     <div>
       <p>This is the login page</p>
       <input 
+        id='login-username'
         type='text'
         placeholder='username'
         value={username}
         onChange={(e) => setUsername(e.target.value)} />
       <input 
+        id='login-password'
         type='text'
         placeholder='password'
         value={password}

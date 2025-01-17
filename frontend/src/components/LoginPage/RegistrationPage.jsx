@@ -10,7 +10,7 @@ function RegistrationPage() {
 
   const handleRegistrationClick = async () => {
     try {
-      const response = await login(username, password);
+      const response = await register(username, password);
       localStorage.setItem("token", response.data.access_token);
       navigateDashboard("/dashboard");
     } catch(error) {

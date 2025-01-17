@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
-from models import users_collection, bcrypt
+from models.models import users_collection, bcrypt
 
 auth = Blueprint('auth', __name__)
 
@@ -34,3 +34,4 @@ def login():
     # Generate a JWT
     access_token = create_access_token(identity=str(user['_id']))
     return jsonify(access_token=access_token), 200
+    
