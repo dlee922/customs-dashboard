@@ -50,6 +50,11 @@ jobs:
         env:
           FLASK_APP: app.py
           FLASK_ENV: development
+      
+      - name: Kill Processes on Port 5173
+        run: |
+          sudo lsof -t -i:5173 | xargs -r kill -9 || true
+
 
       - name: Start Frontend
         run: |
@@ -69,4 +74,4 @@ jobs:
           working-directory: frontend
           start: npm run dev
           wait-on: 'http://localhost:3000'
-          wait-on-timeout: 60
+          wait-on-timeout: 120
