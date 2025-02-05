@@ -42,6 +42,10 @@ jobs:
           cd frontend
           npm install
 
+      - name: Kill Processes on Port 3000
+        run: |
+          sudo lsof -t -i:3000 | xargs -r kill -9 || true
+          
       # START BACKEND (ONLY ONCE)
       - name: Start Backend
         run: |
@@ -61,4 +65,4 @@ jobs:
           working-directory: frontend
           start: npm run dev  # Let Cypress handle frontend start
           wait-on: 'http://localhost:3000'
-          wait-on-timeout: 120
+          wait-on-timeout: 180
