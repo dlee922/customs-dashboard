@@ -42,7 +42,7 @@ jobs:
           cd frontend
           npm install
 
-      # START BACKEND AND FRONTEND FOR CYPRESS TESTING
+      # START BACKEND (ONLY ONCE)
       - name: Start Backend
         run: |
           cd backend
@@ -50,27 +50,15 @@ jobs:
         env:
           FLASK_APP: app.py
           FLASK_ENV: development
-      
-      - name: Kill Processes on Port 5173
-        run: |
-          sudo lsof -t -i:5173 | xargs -r kill -9 || true
 
-      - name: Start Frontend
-        run: |
-          cd frontend
-          npm run dev &
-        env:
-          VITE_API_URL: http://localhost:5000  # Adjust if needed
-
-      - name: Wait for Services
-        run: |
-          sleep 10  # Wait for backend/frontend to be ready
+      - name: Wait for Backend
+        run: sleep 5
 
       # CYPRESS TESTING
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v5
         with:
           working-directory: frontend
-          start: npm run dev
-          wait-on: 'http://localhost:3000, http://localhost:5174'
+          start: npm run dev  # Let Cypress handle frontend start
+          wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
