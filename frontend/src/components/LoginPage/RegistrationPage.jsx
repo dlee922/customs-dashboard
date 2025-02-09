@@ -27,7 +27,7 @@ function RegistrationPage() {
         value={username}
         onChange={(e) => setUsername(e.target.value)} />
       <input 
-        text='text'
+        type='password'
         placeholder='password'
         value={password}
         onChange={(e) => setPassword(e.target.value)} />

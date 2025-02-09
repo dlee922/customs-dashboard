@@ -15,7 +15,7 @@ services:
     build:
       context: ./frontend
     ports:
-      - "5173:5173"
+      - "3000:3000"
     volumes:
       - ./frontend:/app # Ensure your local changes are reflected in the container
       - /app/node_modules # Prevent node_modules from conflicting with the host
